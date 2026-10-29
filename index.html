@@ -687,12 +687,7 @@ html.case-lock,html.case-lock body{overflow:hidden}
 .crowny-hit{pointer-events:auto;cursor:pointer}
 .crowny-hit:hover .bob,.crowny.hop .bob{animation:hop .6s cubic-bezier(.34,1.56,.64,1)}
 @keyframes hop{0%{transform:translateY(0) scale(1)}30%{transform:translateY(2px) scale(1.06,.92)}60%{transform:translateY(-16px) scale(.96,1.05)}100%{transform:translateY(0)}}
-.hero-crowny{position:absolute;z-index:22;left:-9%;top:-11%;width:clamp(104px,11vw,150px);height:auto;filter:drop-shadow(0 16px 18px rgba(40,20,60,.22))}
-.hero-bub{position:absolute;z-index:22;left:13%;top:-12%;background:#FFF;color:var(--bone);font-family:var(--hand);font-weight:700;font-size:clamp(20px,1.8vw,26px);line-height:1;padding:8px 14px 10px;border:2.5px solid var(--bone);border-radius:18px 18px 18px 4px;transform:rotate(-4deg);box-shadow:3px 4px 0 var(--bone);opacity:0;transition:opacity .5s 1.2s,transform .7s 1.2s cubic-bezier(.34,1.56,.64,1)}
-.deck.hi .hero-bub{opacity:1;transform:rotate(-4deg) translateY(-6px)}
 .sticker{left:auto!important;top:auto!important;right:-3%;bottom:12%}
-@media (max-width:980px){.deck{margin-top:clamp(56px,12vw,90px)}}
-@media (max-width:520px){.hero-crowny{left:-3%;top:-13%;width:104px}.hero-bub{left:24%;top:-11%;font-size:20px}}
 .steps-note{align-items:flex-end}
 .steps-note .crowny{width:clamp(78px,7vw,100px);height:auto;margin:0 0 -22px 4px}
 .ben-crowny{width:clamp(76px,7vw,96px);height:auto;margin-bottom:-6px}
@@ -734,6 +729,34 @@ html.case-lock,html.case-lock body{overflow:hidden}
 .peek.br .cc{animation-delay:-1.6s}
 @media (max-width:640px){.peek{width:120px}.peek.tl{left:-52px;top:-34px}.peek.br{right:-48px;bottom:-40px}.pl{padding:10px 15px}.all-card{padding-top:64px;padding-bottom:64px}}
 @media (prefers-reduced-motion:reduce){.peek .cc{animation:none}}
+
+/* hero showcase: one framed project at a time */
+.deck{position:relative;margin:0;max-width:500px;width:100%;justify-self:center;background:#fff;border-radius:30px;padding:12px;box-shadow:0 60px 110px -60px rgba(40,20,60,.45),0 2px 6px rgba(40,20,60,.06),0 0 0 1px rgba(14,13,18,.06);aspect-ratio:auto;perspective:none}
+.deck-stage{position:relative;aspect-ratio:4/5;border-radius:20px;overflow:hidden;background:#0B0A0F;transform:none!important}
+.deck .dcard{position:absolute;inset:0;width:100%;left:0;top:0;border-radius:0;box-shadow:none;opacity:0;transform:none;transition:opacity .9s var(--ease)}
+.deck .dcard.on{opacity:1}
+.deck .dcard .rw{transform:scale(1.06);transition:transform 6s linear}
+.deck .dcard.on .rw{transform:scale(1)}
+.deck-cap{padding:16px 10px 6px}
+.deck-prog{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin-bottom:14px}
+.deck-prog button{appearance:none;border:0;padding:8px 0;background:none;cursor:pointer}
+.deck-prog i{display:block;height:3px;border-radius:3px;background:rgba(14,13,18,.10);overflow:hidden;position:relative}
+.deck-prog i::after{content:"";position:absolute;inset:0;background:var(--bone);transform:scaleX(0);transform-origin:0 50%}
+.deck-prog button.done i::after{transform:scaleX(1)}
+.deck-prog button.run i::after{animation:fill var(--dur,5s) linear forwards}
+@keyframes fill{to{transform:scaleX(1)}}
+.deck-meta{display:flex;justify-content:space-between;align-items:flex-end;gap:16px}
+.deck-who{display:grid;gap:4px;min-width:0}
+.deck-who .eyebrow{color:var(--bone-3)}
+.deck-who b{font-size:clamp(18px,1.5vw,21px);font-weight:600;letter-spacing:-.02em}
+.deck-res{display:grid;justify-items:end;gap:4px;text-align:right}
+.deck-res .n{font-family:var(--display);font-weight:900;font-size:clamp(40px,3.6vw,52px);line-height:.85;color:var(--gold-t)}
+.deck-who,.deck-res{transition:opacity .22s,transform .22s}
+.deck.swap .deck-who,.deck.swap .deck-res{opacity:0;transform:translateY(6px)}
+.deck-res .k{font-family:var(--mono);font-size:10.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--bone-3)}
+.deck .hero-crowny{position:absolute;z-index:5;left:auto;right:26px;top:-50px;width:74px;filter:drop-shadow(0 8px 10px rgba(40,20,60,.18))}
+@media (max-width:980px){.deck{max-width:440px;margin-top:clamp(44px,8vw,64px)}}
+@media (max-width:520px){.deck{border-radius:24px;padding:10px}.deck-stage{border-radius:16px}.deck .hero-crowny{width:62px;top:-42px;right:20px}}
 /* inline Calendly scheduler */
 .cal{margin-top:clamp(40px,5vw,72px);display:grid;grid-template-columns:minmax(0,.7fr) minmax(0,1.3fr);gap:clamp(24px,4vw,64px);align-items:start;padding-top:clamp(32px,4vw,56px);border-top:1px solid var(--line)}
 .cal-copy{display:grid;gap:14px;position:sticky;top:96px}
@@ -837,23 +860,25 @@ footer{border-top:1px solid var(--line);padding-top:clamp(40px,5vw,72px);overflo
         </div>
       </div>
 
-      <div class="deck" id="deck" aria-label="Selected work: 3 Girlz Truck Parking, the Slip dating app, and Hanger Clinic's device configurator">
+      <figure class="deck" id="deck" aria-label="Selected work: 3 Girlz Truck Parking, the Slip dating app, and Hanger Clinic's device configurator">
+        <svg class="crowny hero-crowny crowny-hit" data-doodle viewBox="0 0 140 130" width="74" height="69" role="img" aria-label="Crowny, the Crown & Code mascot"><g class="bob"><path d="M57 108V118M83 108V118" stroke="#1D1611" stroke-width="4" stroke-linecap="round"/><ellipse cx="54" cy="121" rx="8" ry="4.5" fill="#1D1611"/><ellipse cx="86" cy="121" rx="8" ry="4.5" fill="#1D1611"/><path d="M30 84Q20 92 18 101" fill="none" stroke="#1D1611" stroke-width="4" stroke-linecap="round"/><circle cx="17" cy="104" r="6" fill="#FFC21A" stroke="#1D1611" stroke-width="3.2"/><g class="arm-wave"><path d="M110 82Q124 74 128 58" fill="none" stroke="#1D1611" stroke-width="4" stroke-linecap="round"/><circle cx="129" cy="53" r="6" fill="#FFC21A" stroke="#1D1611" stroke-width="3.2"/></g><path d="M30 104C25 82 23 62 25 44L48 64L70 30L92 64L115 44C117 62 115 82 110 104Q70 114 30 104Z" fill="#FFC21A" stroke="#1D1611" stroke-width="4" stroke-linejoin="round"/>
+<path d="M38 62Q41 76 40 92" fill="none" stroke="#FFFFFF" stroke-width="4" stroke-linecap="round" opacity=".6"/>
+<path d="M32 97Q70 107 108 97" fill="none" stroke="#1D1611" stroke-width="3.5" stroke-linecap="round"/>
+<circle cx="25" cy="42" r="7" fill="#FF2E93" stroke="#1D1611" stroke-width="3.5"/><circle cx="70" cy="28" r="8" fill="#2F2BFF" stroke="#1D1611" stroke-width="3.5"/><circle cx="115" cy="42" r="7" fill="#1FCF68" stroke="#1D1611" stroke-width="3.5"/>
+<ellipse cx="49" cy="88" rx="6.5" ry="4" fill="#FF8CC4" opacity=".85"/><ellipse cx="91" cy="88" rx="6.5" ry="4" fill="#FF8CC4" opacity=".85"/><g class="look"><path d="M52 77Q58 71 64 77" fill="none" stroke="#1D1611" stroke-width="3.5" stroke-linecap="round"/><g class="eyes"><ellipse cx="82" cy="76" rx="4.2" ry="5.5" fill="#1D1611"/><circle cx="83.4" cy="74" r="1.4" fill="#FFF7EA"/></g></g><path d="M58 86Q70 101 82 86Z" fill="#1D1611" stroke="#1D1611" stroke-width="3" stroke-linejoin="round"/><path d="M64 94Q70 98 76 94" fill="#D9603B"/></g></svg>
         <div class="deck-stage">
           <div class="dcard" data-clone="rw-3girlz" data-client="3 Girlz Truck Parking" data-name="Website + booking" data-stat="100" data-k="Spaces bookable online"></div>
           <div class="dcard" data-clone="rw-slip" data-client="Slip" data-name="Dating app" data-stat="0→1" data-k="Idea to working prototype"></div>
           <div class="dcard" data-clone="rw-hanger" data-client="Hanger Clinic" data-name="Device configurator" data-stat="$3M" data-k="Revenue growth"></div>
         </div>
-        <div class="deck-time"><span class="n" id="deckStat">100</span><span class="k" id="deckK">Spaces bookable online</span></div>
-        <svg class="crowny hero-crowny crowny-hit" data-doodle viewBox="0 0 140 130" width="150" height="139" role="img" aria-label="Crowny, the Crown & Code mascot, waving hello"><g class="bob"><path d="M57 108V118M83 108V118" stroke="#1D1611" stroke-width="4" stroke-linecap="round"/><ellipse cx="54" cy="121" rx="8" ry="4.5" fill="#1D1611"/><ellipse cx="86" cy="121" rx="8" ry="4.5" fill="#1D1611"/><path d="M30 84Q20 92 18 101" fill="none" stroke="#1D1611" stroke-width="4" stroke-linecap="round"/><circle cx="17" cy="104" r="6" fill="#FFC21A" stroke="#1D1611" stroke-width="3.2"/><g class="arm-wave"><path d="M110 82Q124 74 128 58" fill="none" stroke="#1D1611" stroke-width="4" stroke-linecap="round"/><circle cx="129" cy="53" r="6" fill="#FFC21A" stroke="#1D1611" stroke-width="3.2"/></g><path d="M30 104C25 82 23 62 25 44L48 64L70 30L92 64L115 44C117 62 115 82 110 104Q70 114 30 104Z" fill="#FFC21A" stroke="#1D1611" stroke-width="4" stroke-linejoin="round"/>
-<path d="M38 62Q41 76 40 92" fill="none" stroke="#FFFFFF" stroke-width="4" stroke-linecap="round" opacity=".6"/>
-<path d="M32 97Q70 107 108 97" fill="none" stroke="#1D1611" stroke-width="3.5" stroke-linecap="round"/>
-<circle cx="25" cy="42" r="7" fill="#FF2E93" stroke="#1D1611" stroke-width="3.5"/><circle cx="70" cy="28" r="8" fill="#2F2BFF" stroke="#1D1611" stroke-width="3.5"/><circle cx="115" cy="42" r="7" fill="#1FCF68" stroke="#1D1611" stroke-width="3.5"/>
-<ellipse cx="49" cy="88" rx="6.5" ry="4" fill="#FF8CC4" opacity=".85"/><ellipse cx="91" cy="88" rx="6.5" ry="4" fill="#FF8CC4" opacity=".85"/><g class="look"><path d="M52 77Q58 71 64 77" fill="none" stroke="#1D1611" stroke-width="3.5" stroke-linecap="round"/><g class="eyes"><ellipse cx="82" cy="76" rx="4.2" ry="5.5" fill="#1D1611"/><circle cx="83.4" cy="74" r="1.4" fill="#FFF7EA"/></g></g><path d="M58 86Q70 101 82 86Z" fill="#1D1611" stroke="#1D1611" stroke-width="3" stroke-linejoin="round"/><path d="M64 94Q70 98 76 94" fill="#D9603B"/></g></svg>
-        <span class="hero-bub" aria-hidden="true">hey, welcome in!</span>
-
-        
-        <div class="deck-tag"><span class="eyebrow" id="deckReq">3 Girlz Truck Parking</span><b id="deckName">Website + booking</b></div>
-      </div>
+        <figcaption class="deck-cap">
+          <div class="deck-prog" role="tablist" aria-label="Choose a project"><button type="button" role="tab" aria-label="3 Girlz Truck Parking"><i></i></button><button type="button" role="tab" aria-label="Slip"><i></i></button><button type="button" role="tab" aria-label="Hanger Clinic"><i></i></button></div>
+          <div class="deck-meta">
+            <div class="deck-who"><span class="eyebrow" id="deckReq">3 Girlz Truck Parking</span><b id="deckName">Website + booking</b></div>
+            <div class="deck-res"><span class="n" id="deckStat">100</span><span class="k" id="deckK">Spaces bookable online</span></div>
+          </div>
+        </figcaption>
+      </figure>
     </div>
   </section>
 
@@ -1399,39 +1424,9 @@ footer{border-top:1px solid var(--line);padding-top:clamp(40px,5vw,72px);overflo
   const tl=gsap.timeline({defaults:{ease:'expo.out'}});
   tl.from('.h1 .li',{yPercent:110,rotate:3,duration:1.4,stagger:.09},.1)
     .from('[data-hero]',{y:24,opacity:0,duration:1.1,stagger:.08},.55)
-    .from('.dcard',{y:120,rotate:(i)=>[-14,8,-4,12][i],opacity:0,duration:1.5,stagger:.1},.25)
-    .from('.deck-time,.deck-tag',{scale:.6,opacity:0,duration:1,stagger:.1,ease:'back.out(1.8)'},.9)
+    .from('.deck',{y:60,opacity:0,duration:1.6},.3)
     .from('.hero-glow',{opacity:0,duration:2},0);
 
-  /* DECK: fanned stack that cycles */
-  const deck=$('#deck'), cards=$$('.dcard',deck);
-  let order=cards.map((_,i)=>i);
-  const pose=(pos)=>({x:pos*-5+'%',y:pos*-4+'%',rotate:[ -3, 5, -8, 10][pos],scale:1-pos*.05,zIndex:10-pos,filter:`brightness(${1-pos*.12})`});
-  function layout(dur){order.forEach((ci,pos)=>gsap.to(cards[ci],{...pose(pos),duration:dur,ease:'expo.out'}))}
-  gsap.set(cards,{transformPerspective:1400});
-  order.forEach((ci,pos)=>gsap.set(cards[ci],pose(pos)));
-  const nameEl=$('#deckName'), reqEl=$('#deckReq'), statEl=$('#deckStat'), kEl=$('#deckK');
-  let deckIdx=0;
-  function cycle(){
-    const top=cards[order[0]];
-    gsap.timeline()
-      .to(top,{x:'60%',y:'-6%',rotate:18,duration:.55,ease:'power3.in'})
-      .add(()=>{order.push(order.shift());top.style.zIndex=1;layout(1.1)})
-      .add(()=>{
-        deckIdx=(deckIdx+1)%cards.length;
-        const c=cards[order[0]];
-        gsap.fromTo([nameEl,reqEl,statEl,kEl],{yPercent:100,opacity:0},{yPercent:0,opacity:1,duration:.6,ease:'expo.out',stagger:.04});
-        nameEl.textContent=c.dataset.name; reqEl.textContent=c.dataset.client; statEl.textContent=c.dataset.stat; kEl.textContent=c.dataset.k;
-      },'<');
-  }
-  let deckTimer=setInterval(cycle,3200);
-  ScrollTrigger.create({trigger:deck,start:'top bottom',end:'bottom top',onToggle:s=>{clearInterval(deckTimer);if(s.isActive) deckTimer=setInterval(cycle,3200)}});
-  if(fine){
-    const stage=$('.deck-stage');
-    const rx=gsap.quickTo(stage,'rotationX',{duration:.9,ease:'power3'}), ry=gsap.quickTo(stage,'rotationY',{duration:.9,ease:'power3'});
-    deck.addEventListener('pointermove',e=>{const r=deck.getBoundingClientRect();ry(((e.clientX-r.left)/r.width-.5)*14);rx(-((e.clientY-r.top)/r.height-.5)*12)});
-    deck.addEventListener('pointerleave',()=>{rx(0);ry(0)});
-  }
   gsap.to('.deck',{yPercent:-8,ease:'none',scrollTrigger:{trigger:'.hero',start:'top top',end:'bottom top',scrub:true}});
   gsap.to('.h1',{yPercent:-12,opacity:.3,ease:'none',scrollTrigger:{trigger:'.hero',start:'center top+=200',end:'bottom top',scrub:true}});
 
@@ -1561,6 +1556,27 @@ footer{border-top:1px solid var(--line);padding-top:clamp(40px,5vw,72px);overflo
 
   addEventListener('load',()=>ScrollTrigger.refresh());
   document.fonts && document.fonts.ready.then(()=>ScrollTrigger.refresh());
+})();
+</script>
+<script>
+/* hero showcase: one framed project at a time, independent of the animation library */
+(()=>{const deck=document.getElementById('deck');if(!deck)return;
+  const $=q=>deck.querySelector(q), cards=[...deck.querySelectorAll('.dcard')], tabs=[...deck.querySelectorAll('.deck-prog button')];
+  const txt=[$('#deckReq'),$('#deckName'),$('#deckStat'),$('#deckK')];
+  const DUR=5200; let idx=-1, timer=null, live=true;
+  deck.style.setProperty('--dur',DUR+'ms');
+  const fill=c=>{txt[0].textContent=c.dataset.client;txt[1].textContent=c.dataset.name;txt[2].textContent=c.dataset.stat;txt[3].textContent=c.dataset.k};
+  function show(i){
+    idx=(i+cards.length)%cards.length; const c=cards[idx];
+    cards.forEach((el,j)=>el.classList.toggle('on',j===idx));
+    tabs.forEach((t,j)=>{t.classList.remove('run');t.classList.toggle('done',j<idx);t.setAttribute('aria-selected',j===idx)});
+    void tabs[idx].offsetWidth; tabs[idx].classList.add('run');
+    deck.classList.add('swap'); setTimeout(()=>{fill(c);deck.classList.remove('swap')},220);
+    clearTimeout(timer); if(live) timer=setTimeout(()=>show(idx+1),DUR);
+  }
+  tabs.forEach((t,j)=>t.addEventListener('click',()=>show(j)));
+  if('IntersectionObserver' in window) new IntersectionObserver(es=>es.forEach(e=>{live=e.isIntersecting;clearTimeout(timer);if(live) timer=setTimeout(()=>show(idx+1),DUR)}),{threshold:.2}).observe(deck);
+  show(0);
 })();
 </script>
 <script>
