@@ -530,11 +530,6 @@ html.case-lock,html.case-lock body{overflow:hidden}
 .paper .lede{color:var(--p-2)}
 .paper .lede b{color:var(--p-fg)}
 .paper .eyebrow{color:var(--p-2)}
-.toggle{display:inline-flex;padding:4px;border-radius:999px;background:rgba(14,13,18,.07);position:relative}
-.toggle button{position:relative;z-index:1;border:0;background:none;padding:10px 18px;border-radius:999px;font-size:14px;font-weight:600;color:var(--p-2);cursor:pointer;transition:color .3s}
-.toggle button[aria-pressed="true"]{color:var(--p-bg)}
-.toggle .pill{position:absolute;top:4px;bottom:4px;left:4px;border-radius:999px;background:var(--p-fg);transition:transform .55s var(--ease),width .55s var(--ease)}
-.toggle .save{font-family:var(--mono);font-size:10px;letter-spacing:.04em;margin-left:6px;padding:2px 6px;border-radius:999px;background:var(--gold);color:var(--gold-ink)}
 .plans{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(14px,1.6vw,20px);margin-top:28px;align-items:stretch}
 .plan{border-radius:24px;border:1px solid var(--p-line);background:#F3F4FB;padding:clamp(24px,2.4vw,34px);display:grid;gap:22px;align-content:start;position:relative;transition:transform .6s var(--ease),box-shadow .6s var(--ease)}
 .plan:hover{transform:translateY(-6px);box-shadow:0 30px 60px -30px rgba(40,20,60,.28)}
@@ -548,8 +543,6 @@ html.case-lock,html.case-lock body{overflow:hidden}
 .price .amt{font-family:var(--display);font-weight:900;font-size:clamp(60px,5.4vw,84px);line-height:.85;letter-spacing:-.01em}
 .price .per{font-size:14px;color:var(--p-2)}
 .plan.feat .per{color:#BDB8C4}
-.plan .was{font-family:var(--mono);font-size:11.5px;color:var(--p-2);min-height:1.4em}
-.plan.feat .was{color:#BDB8C4}
 .plan ul{list-style:none;margin:0;padding:18px 0 0;border-top:1px solid var(--p-line);display:grid;gap:11px;font-size:15px}
 .plan.feat ul{border-top-color:rgba(255,255,255,.14)}
 .plan li{display:flex;gap:12px;align-items:flex-start}
@@ -642,7 +635,6 @@ html.case-lock,html.case-lock body{overflow:hidden}
 @media (max-width:640px){.who-row{grid-template-columns:54px minmax(0,1fr)}.who-row p{grid-column:2;text-align:left}}
 
 /* pricing note */
-.price-note{color:var(--gold-t);margin-top:-6px;margin-left:calc(var(--mw,92px) + 10px)}
 
 /* faq bubble */
 .faq-doodle{color:var(--gold-t);margin-top:6px}
@@ -663,7 +655,7 @@ html.case-lock,html.case-lock body{overflow:hidden}
 @media (max-width:860px){.cal-note{display:none}}
 .foot-love{font-family:var(--hand);font-weight:700;font-size:24px;color:var(--gold-t);margin-top:14px;display:inline-flex;align-items:center;gap:6px;transform:rotate(-3deg)}
 .foot-love svg path{fill:var(--pink);stroke:none}
-@media (max-width:520px){.hand{max-width:100%}.hand .note{white-space:normal;font-size:22px}.price-note .note{max-width:230px}}
+@media (max-width:520px){.hand{max-width:100%}.hand .note{white-space:normal;font-size:22px}}
 @media (prefers-reduced-motion:reduce){[data-doodle] .dp{transition:none;stroke-dashoffset:0}[data-doodle] .note{opacity:1;transition:none}.spark,.sticker .ring{animation:none}}
 
 
@@ -1130,22 +1122,13 @@ footer{border-top:1px solid var(--line);padding-top:clamp(40px,5vw,72px);overflo
         <h2 class="h2" id="price-h" data-split>One membership. <span class="it">Every design.</span></h2>
         <div style="display:grid;gap:22px;justify-items:start">
           <p class="lede" data-reveal>Pick the pace that fits your business. Every plan includes <b>unlimited requests and revisions</b>, and you can pause or cancel anytime.</p>
-          <div class="toggle" role="group" aria-label="Billing period" id="toggle">
-            <span class="pill" aria-hidden="true"></span>
-            <button type="button" aria-pressed="true" data-period="m">Monthly</button>
-            <button type="button" aria-pressed="false" data-period="q">Quarterly<span class="save">−10%</span></button>
-          </div>
-          <div class="hand price-note" data-doodle aria-hidden="true">
-            <svg width="54" height="40" viewBox="0 0 54 40"><path class="dp" d="M50 34C36 36 14 30 12 6"/><path class="dp late" d="M4 14L12 4L20 13"/></svg>
-            <span class="note" style="--r:-4deg;margin-top:18px">psst… quarterly saves you 10%</span>
-          </div>
         </div>
       </div>
       <div class="plans">
         <div class="plan" data-reveal>
           <div class="pn"><b>Launch</b></div>
           <p class="for">For a new business that needs a brand and the basics.</p>
-          <div><div class="price"><span class="amt" data-m="1995" data-q="1795">$1,995</span><span class="per">/ month</span></div><div class="was" data-was></div></div>
+          <div><div class="price"><span class="amt">$1,995</span><span class="per">/ month</span></div></div>
           <ul>
             <li><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 7.5l3 3 7-7" stroke="currentColor" stroke-width="1.8"/></svg>1 active request</li>
             <li><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 7.5l3 3 7-7" stroke="currentColor" stroke-width="1.8"/></svg>Most work back in ~3 days</li>
@@ -1153,7 +1136,7 @@ footer{border-top:1px solid var(--line);padding-top:clamp(40px,5vw,72px);overflo
             <li><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 7.5l3 3 7-7" stroke="currentColor" stroke-width="1.8"/></svg>Brand, print, social and web design</li>
             <li><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 7.5l3 3 7-7" stroke="currentColor" stroke-width="1.8"/></svg>Pause or stop whenever you want</li>
           </ul>
-          <a class="btn" href="https://buy.stripe.com/3cIfZg6383kwaowfLgaZi02" data-pay-m="https://buy.stripe.com/3cIfZg6383kwaowfLgaZi02" data-pay-fallback="#book" target="_blank" rel="noopener"><span class="lbl"><span>Join Launch</span><span>Join Launch</span></span><span class="ar"><svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M1 6h10M7 2l4 4-4 4" stroke="currentColor" stroke-width="1.6"/></svg></span></a>
+          <a class="btn" href="https://buy.stripe.com/3cIfZg6383kwaowfLgaZi02" target="_blank" rel="noopener"><span class="lbl"><span>Join Launch</span><span>Join Launch</span></span><span class="ar"><svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M1 6h10M7 2l4 4-4 4" stroke="currentColor" stroke-width="1.6"/></svg></span></a>
         </div>
         <div class="plan feat" data-reveal>
           <svg class="crowny crowny-hit" data-doodle viewBox="0 0 140 130" width="84" height="78" aria-hidden="true"><g class="bob"><path d="M57 108V118M83 108V118" stroke="#1D1611" stroke-width="4" stroke-linecap="round"/><ellipse cx="54" cy="121" rx="8" ry="4.5" fill="#1D1611"/><ellipse cx="86" cy="121" rx="8" ry="4.5" fill="#1D1611"/><g class="arm-cheer"><path d="M30 82Q16 70 14 54" fill="none" stroke="#1D1611" stroke-width="4" stroke-linecap="round"/><circle cx="13" cy="49" r="6" fill="#FFC21A" stroke="#1D1611" stroke-width="3.2"/><path d="M110 82Q124 70 126 54" fill="none" stroke="#1D1611" stroke-width="4" stroke-linecap="round"/><circle cx="127" cy="49" r="6" fill="#FFC21A" stroke="#1D1611" stroke-width="3.2"/></g><path d="M30 104C25 82 23 62 25 44L48 64L70 30L92 64L115 44C117 62 115 82 110 104Q70 114 30 104Z" fill="#FFC21A" stroke="#1D1611" stroke-width="4" stroke-linejoin="round"/>
@@ -1163,7 +1146,7 @@ footer{border-top:1px solid var(--line);padding-top:clamp(40px,5vw,72px);overflo
 <ellipse cx="49" cy="88" rx="6.5" ry="4" fill="#FF8CC4" opacity=".85"/><ellipse cx="91" cy="88" rx="6.5" ry="4" fill="#FF8CC4" opacity=".85"/><path d="M52 79Q58 71 64 79" fill="none" stroke="#1D1611" stroke-width="3.5" stroke-linecap="round"/><path d="M76 79Q82 71 88 79" fill="none" stroke="#1D1611" stroke-width="3.5" stroke-linecap="round"/><path d="M57 86Q70 103 83 86Z" fill="#1D1611" stroke="#1D1611" stroke-width="3" stroke-linejoin="round"/><path d="M63 95Q70 100 77 95" fill="#D9603B"/></g></svg>
           <div class="pn"><b>Studio</b><span class="badge">Most members</span></div>
           <p class="for">For a growing business with a steady flow of design needs.</p>
-          <div><div class="price"><span class="amt" data-m="3995" data-q="3595">$3,995</span><span class="per">/ month</span></div><div class="was" data-was></div></div>
+          <div><div class="price"><span class="amt">$3,995</span><span class="per">/ month</span></div></div>
           <ul>
             <li><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 7.5l3 3 7-7" stroke="currentColor" stroke-width="1.8"/></svg>1 active request</li>
             <li><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 7.5l3 3 7-7" stroke="currentColor" stroke-width="1.8"/></svg>Most work back in ~2 days</li>
@@ -1171,12 +1154,12 @@ footer{border-top:1px solid var(--line);padding-top:clamp(40px,5vw,72px);overflo
             <li><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 7.5l3 3 7-7" stroke="currentColor" stroke-width="1.8"/></svg>App UX and UI design</li>
             <li><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 7.5l3 3 7-7" stroke="currentColor" stroke-width="1.8"/></svg>Websites on Webflow or Shopify</li>
           </ul>
-          <a class="btn" href="https://buy.stripe.com/bJecN4fDIf3e7ckeHcaZi00" data-pay-m="https://buy.stripe.com/bJecN4fDIf3e7ckeHcaZi00" data-pay-fallback="#book" target="_blank" rel="noopener"><span class="lbl"><span>Join Studio</span><span>Join Studio</span></span><span class="ar"><svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M1 6h10M7 2l4 4-4 4" stroke="currentColor" stroke-width="1.6"/></svg></span></a>
+          <a class="btn" href="https://buy.stripe.com/bJecN4fDIf3e7ckeHcaZi00" target="_blank" rel="noopener"><span class="lbl"><span>Join Studio</span><span>Join Studio</span></span><span class="ar"><svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M1 6h10M7 2l4 4-4 4" stroke="currentColor" stroke-width="1.6"/></svg></span></a>
         </div>
         <div class="plan" data-reveal>
           <div class="pn"><b>Studio Plus</b></div>
           <p class="for">For brands running launches, campaigns and product at once.</p>
-          <div><div class="price"><span class="amt" data-m="6495" data-q="5845">$6,495</span><span class="per">/ month</span></div><div class="was" data-was></div></div>
+          <div><div class="price"><span class="amt">$6,495</span><span class="per">/ month</span></div></div>
           <ul>
             <li><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 7.5l3 3 7-7" stroke="currentColor" stroke-width="1.8"/></svg>2 active requests</li>
             <li><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 7.5l3 3 7-7" stroke="currentColor" stroke-width="1.8"/></svg>Most work back in ~2 days</li>
@@ -1185,14 +1168,13 @@ footer{border-top:1px solid var(--line);padding-top:clamp(40px,5vw,72px);overflo
             <li><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 7.5l3 3 7-7" stroke="currentColor" stroke-width="1.8"/></svg>AI automations and custom agents</li>
             <li><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 7.5l3 3 7-7" stroke="currentColor" stroke-width="1.8"/></svg>Weekly strategy call</li>
           </ul>
-          <a class="btn" href="https://buy.stripe.com/00wcN4fDI3kw54c56CaZi01" data-pay-m="https://buy.stripe.com/00wcN4fDI3kw54c56CaZi01" data-pay-fallback="#book" target="_blank" rel="noopener"><span class="lbl"><span>Join Studio Plus</span><span>Join Studio Plus</span></span><span class="ar"><svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M1 6h10M7 2l4 4-4 4" stroke="currentColor" stroke-width="1.6"/></svg></span></a>
+          <a class="btn" href="https://buy.stripe.com/00wcN4fDI3kw54c56CaZi01" target="_blank" rel="noopener"><span class="lbl"><span>Join Studio Plus</span><span>Join Studio Plus</span></span><span class="ar"><svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M1 6h10M7 2l4 4-4 4" stroke="currentColor" stroke-width="1.6"/></svg></span></a>
         </div>
       </div>
       <div class="guar">
         <div data-reveal><span class="gi"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="6" y="5" width="3.5" height="14" rx="1"/><rect x="14.5" y="5" width="3.5" height="14" rx="1"/></svg></span><div><b>Pause anytime</b><p>Unused days roll over. Pick up right where you left off when business picks up.</p></div></div>
         <div data-reveal><span class="gi"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 3l7 3v6c0 4.5-3 7.6-7 9-4-1.4-7-4.5-7-9V6z"/><path d="M9 12l2 2 4-4"/></svg></span><div><b>First-week guarantee</b><p>Not the right fit after your first week? Get 75% of your payment back.</p></div></div>
       </div>
-      <p class="note">Quarterly plans are billed every 3 months.</p>
     </div>
   </section>
 
@@ -1319,27 +1301,6 @@ footer{border-top:1px solid var(--line);padding-top:clamp(40px,5vw,72px);overflo
       if(window.ScrollTrigger) setTimeout(()=>ScrollTrigger.refresh(),650);
     });
   });
-
-  /* pricing toggle */
-  const tog=$('#toggle'), pill=$('.pill',tog), tb=$$('button',tog);
-  const fmt=n=>'$'+Math.round(n).toLocaleString('en-US');
-  function placePill(btn){pill.style.width=btn.offsetWidth+'px';pill.style.transform='translateX('+(btn.offsetLeft-4)+'px)'}
-  function setPeriod(p,animate){
-    tb.forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.period===p)));
-    placePill(tb.find(b=>b.dataset.period===p));
-    $$('.amt').forEach(a=>{
-      const to=+a.dataset[p], from=+(a.textContent.replace(/\D/g,''));
-      const was=a.closest('.plan').querySelector('[data-was]');
-      was.textContent = p==='q' ? fmt(+a.dataset.m)+' monthly · '+fmt(+a.dataset.q*3)+' per quarter' : '';
-      if(animate && window.gsap && !reduce){const o={v:from};gsap.to(o,{v:to,duration:.9,ease:'expo.out',onUpdate:()=>a.textContent=fmt(o.v)})}
-      else a.textContent=fmt(to);
-    });
-  }
-  tb.forEach(b=>b.addEventListener('click',()=>{setPeriod(b.dataset.period,true);setPay(b.dataset.period)}));
-  /* Stripe checkout links per billing period; periods without a link fall back to booking a call */
-  function setPay(p){$$('[data-pay-fallback]').forEach(a=>a.setAttribute('href',a.dataset['pay'+p.toUpperCase()]||a.dataset.payFallback))}
-  requestAnimationFrame(()=>setPeriod('m',false));
-  addEventListener('resize',()=>placePill(tb.find(b=>b.getAttribute('aria-pressed')==='true')));
 
   /* request board data */
   const people={A:['#FFC21A','Amara'],K:['#FF2E93','Kofi'],N:['#1FCF68','Nia'],J:['#2F2BFF','Jalen']};
@@ -1603,11 +1564,6 @@ footer{border-top:1px solid var(--line);padding-top:clamp(40px,5vw,72px);overflo
 })();
 </script>
 <script>
-/* point the pricing note at the Quarterly button */
-(()=>{const t=document.getElementById('toggle'),n=document.querySelector('.price-note');if(!t||!n)return;
-  const m=t.querySelector('[data-period="m"]'),q=t.querySelector('[data-period="q"]');
-  const fit=()=>{const off=q.getBoundingClientRect().left-t.getBoundingClientRect().left+q.offsetWidth*.25-6;n.style.setProperty('--mw',Math.max(0,off-10)+'px')};
-  fit();addEventListener('resize',fit);document.fonts&&document.fonts.ready.then(fit);})();
 /* Crowny: eyes follow the pointer, hop on tap */
 (()=>{const cs=[...document.querySelectorAll('.crowny')];
   const deck=document.getElementById('deck');
